@@ -1,1 +1,98 @@
-<h1>DOM play</h1>
+<html>
+    <head>
+        <style>
+            div#play span{
+            }
+            body{
+                font-family: 'Courier New', Courier, monospace;
+                background-color: antiquewhite;
+            }
+            #play{
+                text-align:center;
+                margin-left: 25%;
+                margin-right: 25%;
+            }
+            li{
+                margin:5px;
+            }
+            footer{
+                text-align:center;
+                font-size: 12;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>DOM Play</h1>
+        <h3><a href="https://jordanradar.github.io/portal-it121/" target="_blank">Return to Portal</a></h3>
+        <p>Scene Source: 25th Ward: The Silver Case<br>This is an exercise to create a script-like website that enables the user to click on a line, and have all of that character's lines highlighted. Here are the original requirements: 
+            <ol>
+            <li>With a single click, highlight (bold or otherwise) all lines for a specific actor in a play</li>
+            <li>Un-highlight (normal or otherwise) all lines from all other actors in the play</li>
+            <li>The function(s) created to do the work must accommodate any number of actors, and any number of additional lines added to the page
+            <li>The page must do the work without page re-loads (i.e. it must be done via JavaScript and the DOM)</li>
+            <li>The page may not use a third party API (jQuery, for example)</li>
+            <li>HTML "hooks" may be added to the page, meaning you can edit the HTML to enable your scripts to perform properly</li>
+            </ol>
+        </p>
+        <div id="play">
+            <p>25th Ward<br>Area C3<br>Regional Adjustment Bureau<br>Meeting Room<br>October 11th, 9:35am</p>
+            <p><span data-actor="ichigaya">Ichigaya:<br> That was it. Yesterday, at the Loud Noise livehouse. This is the part of the incident that we got on film.</span></p>
+            <p><span data-actor="tsuki">Tsuki:<br>Oh lord, looks like "God" went and got himself stabbed. What do you think, Osato? You're a fan, right?</span></p>
+            <p><span data-actor="osato">Osato:<br>What do you mean, "what do I think"...?</span></p>
+            <p><span data-actor="ichigaya">Ichigaya:<br>The victim was Yutaro Yamashiro, also known as "Judah Law", 28 years old, singer for the band Death Valley Bomb. The perpetrator was Tomiko Ozuya, 34 years old, an office worker at Matsugane, a major trade conglomerate with headquarters in the 25th Ward. According to the staff who shot this video, Ozuya charged the stage from the floor, grabbed onto Yamashiro, and stabbed him in the torso with a knife she had hidden.</span></p>
+            <p><span data-actor="osato">Osato:<br>Haah...Judaaah!</span></p>
+            <p><span data-actor="tsuki">Tsuki<br>Yeah yeah, we know. Calm down.</span></p>
+            <p><span data-actor="nango">Nango:<br>Security must've been pretty half-baked to have missed that knife...</span></p>
+            <p><span data-actor="mitsumoto">Mitsumoto<br>They're gonna need some guidance.</span></p>
+            <p><span data-actor="ichigaya">Ichigaya:<br>After that, the staff tried to hold Ozuya down, but Ozuya distracted them with the knife, and in a split second she committed suicide using some sort of poison.</span></p>
+            <p><span data-actor="yabukawa">Yabukawa<br>Poison...</span></p>
+            <p><span data-actor="kiryu">Kiryu:<br>This is the poison she used.</span></p>
+            <p><span data-actor="sasatani">Sasatani:<br>What is this..."Bloody High"?</span></p>
+            <p><span data-actor="kiryu">Kiryu:<br>Yeah. Shoot this into your neck and you get an intense feeling of euphoria, but at the same time, it causes the blood throughout your body to start boiling up and kills you pretty quickly.</span></p>
+            <p><span data-actor="yabukawa">Yabukawa:<br>They cracked down on it pretty hard, but that caused a bunch of off-brand copycat products to flood the market, so recently it's supposed to be almost impossible to get, even on the black market.</span></p>
+            <p><span data-actor="osato">Osato:<br>And? And??? So what happened to Judah?</span></p>
+            <p><span data-actor="ichigaya">Ichigaya:<br>He was taken to the hospital just after Ozuya died.</span></p>
+            <p><span data-actor="osato">Osato:<br>So he didn't die? He didn't die, did he? Come back to me, Judaaah!</span></p>
+            <p><span data-actor="tsuki">Tsuki:<br>Yeah yeah, we know. Calm down.</span></p>
+            <p><span data-actor="kiryu">Kiryu:<br>Nango, Mitsumoto. You two go check out Ozuya, and their perimeter. If Bloody High is circulating out in the field again, it's gonna be a real problem. Find out where it came from.</span></p>
+            <p><span data-actor="nango">Nango:<br>OK.</span></p>
+            <p><span data-actor="mitsumoto">Mitsumoto:<br>Got it.</span></p>
+            <p><span data-actor="osato">Osato:<br>Chief! Please let me join the investigation! And also Tsuki-san!</span></p>
+            <p><span data-actor="tsuki">Tsuki:<br>What do you mean "also"?</span></p>
+            <p><span data-actor="kiryu">Kiryu:<br>Osato, letting your own feelings get in the way is just gonna cause trouble. I know this from experience. Understand?</span></p>
+            <p><span data-actor="tsuki">Tsuki:<br>You'd better understand.</span></p>
+            <p><span data-actor="osato">Osato:<br>I understand...</span></p>
+            <p><span data-actor="nango">Nango:<br>Anyway, we'll let you know if we find anything out, OK?</span></p>
+            <p><span data-actor="osato">Osato:<br>Nango! Please do! Seriously!</span></p>
+            <p><span data-actor="nango">Nango:<br>I know, I know.</span></p>
+            <p><span data-actor="kiryu">Kiryu:<br>Also... This next one is also a suicide, but it's a pretty serious matter for us. Ichigaya...</span></p>
+            <p>-End Scene-</p>
+        </div>
+        <script>
+
+            const spans = document.querySelectorAll('div#play span');
+
+            console.log(spans);
+
+            for(const mySpan of spans){
+                mySpan.addEventListener('click',function(ev){
+                    //alert(mySpan.dataset.actor)
+                    highlightActor(mySpan.dataset.actor);
+                });
+            }
+            function highlightActor(myActor){
+
+                for(const mySpan of spans){
+                    if(myActor == mySpan.dataset.actor){
+                    mySpan.style.backgroundColor = 'yellow';
+                }else{
+                    mySpan.style.backgroundColor = 'antiquewhite';
+                }
+            }
+            }
+        </script>
+    </body>
+    <footer>
+        Jordan Radnich, 2021
+    </footer>
+</html>
